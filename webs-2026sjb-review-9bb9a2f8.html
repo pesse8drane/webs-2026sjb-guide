@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安静入口 · 世界杯</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafaf9;
+      color: #1e1e1e;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      line-height: 1.75;
+      padding: 2.5rem 1.25rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-wrap {
+      max-width: 680px;
+      width: 100%;
+    }
+
+    /* 叙事式 header，不占太大面积 */
+    .page-header {
+      margin-bottom: 3.2rem;
+      border-bottom: 1px solid #ececec;
+      padding-bottom: 1.6rem;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      color: #121212;
+    }
+
+    .page-header .subhead {
+      font-size: 1rem;
+      color: #5f5f5f;
+      font-weight: 380;
+      max-width: 500px;
+    }
+
+    /* 文章标题 – 模拟博客正文节奏 */
+    .article-title {
+      font-size: 1.35rem;
+      font-weight: 520;
+      margin: 2rem 0 0.4rem 0;
+      line-height: 1.4;
+      color: #1a1a1a;
+    }
+
+    .article-title:first-of-type {
+      margin-top: 0.2rem;
+    }
+
+    .article-meta {
+      font-size: 0.85rem;
+      color: #898989;
+      margin-bottom: 1.2rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .article-meta span {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      color: #2b2b2b;
+      margin: 1.6rem 0 1.2rem 0;
+      padding-left: 0.25rem;
+      border-left: 3px solid #d4d4d4;
+      padding-left: 1rem;
+      font-weight: 390;
+    }
+
+    p {
+      margin-bottom: 1.3rem;
+      font-size: 1rem;
+      hyphens: auto;
+      word-break: break-word;
+    }
+
+    /* 引用提示 —— 像博客中的摘录块 */
+    .pull-quote {
+      background: #f2f2f0;
+      padding: 1.3rem 1.6rem;
+      margin: 1.8rem 0;
+      border-radius: 0px;
+      font-size: 0.95rem;
+      color: #2c2c2c;
+      border-left: 4px solid #8a8a8a;
+      font-style: normal;
+      line-height: 1.7;
+    }
+
+    .pull-quote strong {
+      font-weight: 520;
+      color: #111;
+    }
+
+    .pull-quote .quote-source {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #6e6e6e;
+    }
+
+    /* 内联链接 + 访问句风格 */
+    .inline-link {
+      color: #1e3a5f;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b0c4d9;
+      transition: all 0.2s ease;
+    }
+
+    .inline-link:hover {
+      color: #0b1d33;
+      text-decoration-color: #1e3a5f;
+    }
+
+    /* 访问句 —— 放在接近结尾，语气柔软 */
+    .visit-sentence {
+      background: transparent;
+      border: 1px solid #e2e2e0;
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0 1.8rem 0;
+      border-radius: 0px;
+      font-size: 1rem;
+      color: #1e1e1e;
+      text-align: left;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .visit-sentence a {
+      font-weight: 470;
+    }
+
+    /* FAQ 摘要风格 — 极简问答 */
+    .faq-mini {
+      margin: 2.2rem 0 1rem 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ececeb;
+      padding: 0.9rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 490;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: #1a1a1a;
+    }
+
+    .faq-a {
+      color: #4b4b4b;
+      font-size: 0.95rem;
+      padding-left: 0.2rem;
+    }
+
+    /* 脚注 */
+    .footer-note {
+      margin-top: 3.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #eaeaea;
+      font-size: 0.8rem;
+      color: #7c7c7c;
+      letter-spacing: 0.015em;
+    }
+
+    /* 响应式 */
+    @media (max-width: 500px) {
+      body {
+        padding: 1.8rem 1rem;
+      }
+      .page-header h1 {
+        font-size: 1.6rem;
+      }
+      .article-title {
+        font-size: 1.15rem;
+      }
+      .lead {
+        font-size: 0.98rem;
+      }
+      .pull-quote {
+        padding: 1rem 1.2rem;
+      }
+      .visit-sentence {
+        padding: 1rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- header -->
+    <header class="page-header">
+      <h1>一个安静的入口</h1>
+      <div class="subhead">不着急，不喧哗，慢慢看</div>
+    </header>
+
+    <!-- 第一篇博客段落 —— 标题+正文 -->
+    <div class="article-title">为什么需要稳定的页面说明</div>
+    <div class="article-meta">
+      <span>📆 2026 · 日常</span>
+      <span>⏱ 4 分钟</span>
+    </div>
+
+    <p>网站像一条走廊，有的入口明亮热闹，有的则需要你停下来读两句说明。这里不是临时页面，也不是活动预告。这是一个长期存在的、指向<a href="https://webs-2026sjb.com" class="inline-link">世界杯</a>的介绍页——它负责说明：你即将看到什么，这里是什么氛围，以及为什么值得你花几分钟了解。</p>
+
+    <div class="lead">
+      如果你只是想要一个直达的、干净的通道，这里就是了。没有弹窗，没有倒计时，只有文字和方向。
+    </div>
+
+    <p>很多人打开一个链接之前，总想先知道里面是什么。这个页面就是为这种习惯准备的。它不是首页，不是官网，是一个安静的、偏生活化的说明空间。你可以把它看作一篇博客文章，只不过文章末尾有一扇门，通向更完整的内容。</p>
+
+    <!-- 第二段正文 + 引用提示 -->
+    <div class="article-title">关于那个叫「世界杯」的地方</div>
+    <div class="article-meta">
+      <span>📍 稳定入口</span>
+      <span>📎 非官方说明</span>
+    </div>
+
+    <p>在各类信息交织的今天，一个直接的、不绕弯子的网址反而成了一种奢侈品。我们整理了这个介绍页，目的很简单：让你在打开<a href="https://webs-2026sjb.com" class="inline-link">世界杯</a>之前，对它的背景、节奏和内容有个基本的印象。它可能包含赛事信息、文化记录或日常随笔，具体由运营者决定，但入口始终不变。</p>
+
+    <div class="pull-quote">
+      <strong>引用提示</strong> —— “一个页面如果连自己是谁都说不清楚，那再漂亮的设计也只是摆设。说明不是限制，是尊重彼此的时间。”
+      <span class="quote-source">—— 某天下午的笔记</span>
+    </div>
+
+    <p>这里不承诺独家消息，也不做任何诱导性描述。你看到的每一个句子都是对已有事实或氛围的转述。如果你喜欢先观察再决定，那这个介绍页会非常适合你。</p>
+
+    <!-- 第三段 —— 特点 + 场景混合 -->
+    <div class="article-title">适合哪些场景</div>
+    <p>当你睡前想随便翻点什么，或者等咖啡的间隙想找个不闹心的地方，那个链接就在那里。不是所有网站都需要用“立即注册”开头。有时候，一句“欢迎来看看”就足够了。这个页面所指向的<a href="https://webs-2026sjb.com" class="inline-link">世界杯</a>，也保持了同样的气质：内容优先，界面从简。</p>
+
+    <p>它不一定每天更新，但每次更新都不会让你失望。你不需要注册，不需要登录，不需要关注。这是一个开放的、可收藏的地址。</p>
+
+    <!-- 访问句 —— 自然嵌入链接 -->
+    <div class="visit-sentence">
+      <span>🧭 访问句 · 如果你准备好了，</span>
+      <a href="https://webs-2026sjb.com" class="inline-link">世界杯</a>
+      <span> 就是那个地方。不急，页面会一直在这里。</span>
+    </div>
+
+    <!-- FAQ 摘要 —— 只写最必要的两个问题 -->
+    <div class="faq-mini">
+      <div class="faq-item">
+        <div class="faq-q">❓ 这个介绍页和主站是什么关系？</div>
+        <div class="faq-a">它是主站的文字说明页，帮助你了解氛围和内容方向，不是替代品也不是广告页。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 链接会变吗？</div>
+        <div class="faq-a">目前指向 <a href="https://webs-2026sjb.com" class="inline-link">世界杯</a> 的地址是固定的。如果未来有调整，这个介绍页也会同步更新说明。</div>
+      </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+      <span>© 稳定入口 · 内容说明页 · 无追踪无广告</span>
+    </div>
+  </div>
+</body>
+</html>
